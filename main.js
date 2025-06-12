@@ -21,7 +21,7 @@ buttons.forEach((button) => {
             currentInput = memoryValue;
             updateDisplay();
         }
-        else if (value === "=") {         // результат обчислення двох чисел
+        else if (value === "=") {         // кнопка = показує результат обчислення двох чисел
             if (previousInput !== "" && currentInput !== "" && operation !== null) {
                 const prev = Number(previousInput);
                 const current = Number(currentInput);
@@ -60,7 +60,11 @@ buttons.forEach((button) => {
                 operation = null;
                 updateDisplay();
             }
+<<<<<<<< HEAD:main.js
         } else if (operations.includes(value)) { 
+========
+        } else if (operations.includes(value)) { // ввели першу цифру - вона зберіглась, обрали операцію і чекаємо друге число
+>>>>>>>> caedc86793e3ea39950ea0ea1d8b96724738258c:file.js
             previousInput = currentInput;
             operation = value;
             currentInput = "";
