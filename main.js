@@ -1,17 +1,3 @@
-let currentInput = "";
-let previousInput = "";
-let operation = null;
-let result = 0;
-
-const operations = ["+", "-", "*", "/", "Mod", "x²", "x³", "ʸ√x", "xʸ"];
-const singleOperations = ["1/x", "log10", "ln", "√", "sin", "cos", "tan", "n!", "%", "Rnd", "π", "e", "³√", "bin", "oct", "hex"];
-
-const display1 = document.getElementById("display1");
-
-const buttons = document.querySelectorAll("button");
-
-let memoryValue = 0;
-
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
 
@@ -74,7 +60,7 @@ buttons.forEach((button) => {
                 operation = null;
                 updateDisplay();
             }
-        } else if (operations.includes(value)) {
+        } else if (operations.includes(value)) { 
             previousInput = currentInput;
             operation = value;
             currentInput = "";
@@ -136,12 +122,12 @@ buttons.forEach((button) => {
                     break;
 
             }
-            currentInput = result;
+            currentInput = result; 
             previousInput = "";
             operation = null;
             updateDisplay();
         }
-        else {
+        else { //
                 currentInput += value;
                 updateDisplay();
         }
@@ -150,23 +136,9 @@ buttons.forEach((button) => {
         
 })
 
-function factorial(n) {
-    if (n < 0) return NaN;
-    if (n === 0 || n === 1) return 1;
-    let res = 1;
-    for (let i = 2; i <= n; i++) {
-        res *= i;
-    }
-    return res;
-}
 
-function updateDisplay() {
-    if (operation === null) {
-        display1.innerText = currentInput;
-    } else {
-        display1.innerText = previousInput + " " + operation + " " + currentInput;
-    }
-}
+
+
 
 
 
