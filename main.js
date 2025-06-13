@@ -4,25 +4,55 @@ buttons.forEach((button) => {
         const value = button.textContent;
         console.log(`"${value}"`);
         
-
-        if (value === "C") {             // кнопка С - очищає все
-            currentInput = "";
-            previousInput = "";
-            operation = null;
-            display1.innerText = "0";
+        if (value === "C") {              // кнопка С - очищає все
+            clearAll();
         } else if (value === "Del") {     //кнопка Del - прибирає тільки одну цифру(елемент)
-            currentInput = currentInput.slice(0, -1);
-            updateDisplay();
-        } else if (value === "M+") {     // кнопка М+ - зберігає в память
-            memoryValue += Number(currentInput);
-            currentInput = ""
-
-        } else if (value === "MR") {     // //кнопка MR - виводить збережене з памяті
-            currentInput = memoryValue;
+            deleteLastElement();
+        } else if (value === "M+") {      // кнопка М+ - зберігає в память
+            memoryAdd();
+        } else if (value === "MR") {     //кнопка MR - виводить збережене з памяті
+            memoryCall();
+        } else if (value === "=") {        // кнопка = показує результат обчислення двох чисел
+            calculateResult();
+        } else if (operations.includes(value)) { // ввели першу цифру - вона зберіглась, обрали операцію і чекаємо друге число
+            handleOperation(value);
+        } else if (singleOperations.includes(value)) {   // результат обчислення операцій з одним числом
+            calculateSingleOperations(value);
+        } else {
+            currentInput += value;
             updateDisplay();
         }
-        else if (value === "=") {         // кнопка = показує результат обчислення двох чисел
-            if (previousInput !== "" && currentInput !== "" && operation !== null) {
+        
+    })
+        
+})
+
+//функції для AddEventListener
+
+function clearAll() {
+    currentInput = "";
+    previousInput = "";
+    operation = null;
+    display1.innerText = "0";
+}
+
+function deleteLastElement() {
+    currentInput = currentInput.slice(0, -1);
+    updateDisplay();
+}
+
+function memoryAdd() {
+    memoryValue += Number(currentInput);
+    currentInput = "";
+}
+
+function memoryCall() {
+    currentInput = memoryValue;
+    updateDisplay();
+}
+
+function calculateResult() {
+    if (previousInput !== "" && currentInput !== "" && operation !== null) {
                 const prev = Number(previousInput);
                 const current = Number(currentInput);
                 switch(operation) {
@@ -55,22 +85,18 @@ buttons.forEach((button) => {
                         break;
                     
                     }
-                currentInput = result;
-                previousInput = "";
-                operation = null;
-                updateDisplay();
-            }
-<<<<<<<< HEAD:main.js
-        } else if (operations.includes(value)) { 
-========
-        } else if (operations.includes(value)) { // ввели першу цифру - вона зберіглась, обрали операцію і чекаємо друге число
->>>>>>>> caedc86793e3ea39950ea0ea1d8b96724738258c:file.js
-            previousInput = currentInput;
-            operation = value;
-            currentInput = "";
-            updateDisplay();
-        } else if (singleOperations.includes(value)) {   // результат обчислення операцій з одним числом
-            const current = Number(currentInput);
+                setResult(result);
+}}
+
+function handleOperation(value) {
+    previousInput = currentInput;
+    operation = value;
+    currentInput = "";
+    updateDisplay();
+}
+
+function calculateSingleOperations(value) {
+    const current = Number(currentInput);
             switch(value) {
                 case "1/x":
                     if (current === 0) {
@@ -126,21 +152,8 @@ buttons.forEach((button) => {
                     break;
 
             }
-            currentInput = result; 
-            previousInput = "";
-            operation = null;
-            updateDisplay();
-        }
-        else { //
-                currentInput += value;
-                updateDisplay();
-        }
-        
-    })
-        
-})
-
-
+            setResult(result);
+}
 
 
 

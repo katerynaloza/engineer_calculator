@@ -10,6 +10,7 @@ const display1 = document.getElementById("display1");
 
 const buttons = document.querySelectorAll("button");
 
+
 let memoryValue = 0;
 
 
@@ -19,4 +20,11 @@ function updateDisplay() {       // оновлення дисплею
     } else {
         display1.innerText = previousInput + " " + operation + " " + currentInput;
     }
+}
+
+function setResult(value) {
+    currentInput = value; 
+    previousInput = "";
+    operation = null;
+    updateDisplay();
 }
